@@ -4,9 +4,10 @@ import { useAuth } from '@/contexts/auth-context';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useProjects } from '@/hooks/use-projects';
+import { Navbar } from '@/components/navbar';
 
 export default function DashboardPage() {
-  const { user, logout, isLoading } = useAuth();
+  const { user, isLoading } = useAuth();
   const router = useRouter();
   const { data, isLoading: isLoadingProjects } = useProjects();
 
@@ -28,22 +29,7 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between">
-        <h1 className="text-lg font-semibold text-gray-900">Client Portal</h1>
-        <div className="flex items-center gap-4">
-          <span className="text-sm text-gray-500">{user.email}</span>
-          <button
-            onClick={() => {
-              logout();
-              router.push('/login');
-            }}
-            className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
-          >
-            Déconnexion
-          </button>
-        </div>
-      </nav>
-
+      <Navbar />
       <main className="max-w-5xl mx-auto px-6 py-8">
         <h2 className="text-xl font-semibold text-gray-900 mb-6">Mes projets</h2>
 

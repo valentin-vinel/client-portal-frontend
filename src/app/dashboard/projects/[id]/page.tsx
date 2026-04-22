@@ -4,6 +4,7 @@ import { useAuth } from '@/contexts/auth-context';
 import { useRouter, useParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { useProject } from '@/hooks/use-project';
+import { Navbar } from '@/components/navbar';
 
 export default function ProjectPage() {
   const { user, isLoading } = useAuth();
@@ -30,7 +31,8 @@ export default function ProjectPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between">
+      <Navbar />
+      <main className="max-w-5xl mx-auto px-6 py-8 space-y-8">
         <div className="flex items-center gap-3">
           <button
             onClick={() => router.push('/dashboard')}
@@ -38,16 +40,12 @@ export default function ProjectPage() {
           >
             ← Retour
           </button>
-          <h1 className="text-lg font-semibold text-gray-900">{project.name}</h1>
+          <h2 className="text-xl font-semibold text-gray-900">{project.name}</h2>
         </div>
-        <span className="text-sm text-gray-500">{user.email}</span>
-      </nav>
-
-      <main className="max-w-5xl mx-auto px-6 py-8 space-y-8">
 
         {/* Étapes */}
         <section>
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Étapes du projet</h2>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Étapes du projet</h3>
           {project.steps?.length === 0 ? (
             <p className="text-gray-500 text-sm">Aucune étape définie.</p>
           ) : (
@@ -86,7 +84,7 @@ export default function ProjectPage() {
 
         {/* Comptes rendus */}
         <section>
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Comptes rendus</h2>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Comptes rendus</h3>
           {project.reports?.length === 0 ? (
             <p className="text-gray-500 text-sm">Aucun compte rendu disponible.</p>
           ) : (
@@ -94,7 +92,7 @@ export default function ProjectPage() {
               {project.reports?.map((report) => (
                 <div key={report.id} className="bg-white rounded-xl border border-gray-100 p-5">
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-medium text-gray-900 text-sm">{report.title}</h3>
+                    <h4 className="font-medium text-gray-900 text-sm">{report.title}</h4>
                     <span className="text-xs text-gray-400">
                       {new Date(report.createdAt).toLocaleDateString('fr-FR')}
                     </span>
@@ -108,7 +106,7 @@ export default function ProjectPage() {
 
         {/* Documents */}
         <section>
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Documents</h2>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Documents</h3>
           {project.documents?.length === 0 ? (
             <p className="text-gray-500 text-sm">Aucun document disponible.</p>
           ) : (
@@ -131,7 +129,6 @@ export default function ProjectPage() {
             </div>
           )}
         </section>
-
       </main>
     </div>
   );
