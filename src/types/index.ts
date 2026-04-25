@@ -2,6 +2,10 @@ export interface User {
   id: number;
   email: string;
   role: 'admin' | 'client';
+  firstName?: string;
+  lastName?: string;
+  company?: string;
+  phone?: string;
 }
 
 export interface Step {
